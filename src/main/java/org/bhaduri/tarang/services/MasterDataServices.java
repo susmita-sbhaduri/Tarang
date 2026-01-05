@@ -16,9 +16,12 @@ import java.util.Date;
 import java.util.List;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import org.bhaduri.tarang.DA.CalltableDAO;
 import org.bhaduri.tarang.DA.UserDAO;
+import org.bhaduri.tarang.DTO.CallTable;
 
 import org.bhaduri.tarang.DTO.UserDTO;
+import org.bhaduri.tarang.entities.Calltable;
 import org.bhaduri.tarang.entities.Users;
 /**
  *
@@ -39,6 +42,7 @@ public class MasterDataServices {
             userAuthDto.setID(userInfo.getIdusers());
             userAuthDto.setUsername(userInfo.getUsername());
             userAuthDto.setPassword(userInfo.getPassword());
+            userAuthDto.setName(userInfo.getName());
             return userAuthDto;
         }
         catch (NoResultException e) {
@@ -48,6 +52,24 @@ public class MasterDataServices {
         }
         catch (Exception exception) {
             System.out.println(exception + " has occurred in getUserAuthDetails.");
+            return null;
+        }
+    }
+    
+    public List<String> getCallScripIdList() {
+        CalltableDAO calltable = new CalltableDAO(utx,emf);
+        CallTable record = new CallTable();
+//        List<CallTable> recordList = new ArrayList<>();
+        try {   
+            List<String> emplist = calltable.listScripid();            
+            return emplist;
+        }
+        catch (NoResultException e) {
+            System.out.println("No user found with provided credentials.");           
+            return null;
+        }
+        catch (Exception exception) {
+            System.out.println(exception + " has occurred in getCallScripIdList.");
             return null;
         }
     }

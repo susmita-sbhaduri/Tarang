@@ -7,6 +7,8 @@
     <named-query name="Users.getUserDetails">
         <query>SELECT u FROM Users u WHERE u.username = :username and u.password = :password</query>
     </named-query>
-    
+    <named-query name="Calltable.listScripid">
+        <query>SELECT DISTINCT c.calltablePK.scripid FROM Calltable c</query>
+    </named-query>
 </entity-mappings>
 

@@ -27,7 +27,8 @@ import java.io.Serializable;
     @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),
     @NamedQuery(name = "Users.findByIdusers", query = "SELECT u FROM Users u WHERE u.idusers = :idusers"),
     @NamedQuery(name = "Users.findByUsername", query = "SELECT u FROM Users u WHERE u.username = :username"),
-    @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password")})
+    @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password"),
+    @NamedQuery(name = "Users.findByName", query = "SELECT u FROM Users u WHERE u.name = :name")})
 public class Users implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,6 +44,9 @@ public class Users implements Serializable {
     @Size(max = 50)
     @Column(name = "password")
     private String password;
+    @Size(max = 100)
+    @Column(name = "name")
+    private String name;
 
     public Users() {
     }
@@ -73,6 +77,14 @@ public class Users implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

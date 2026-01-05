@@ -33,7 +33,7 @@ public class LoginFilter implements Filter{
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         // For the first application request there is no loginBean in the session so user needs to log in
         // For other requests loginBean is present but we need to check if user has logged in successfully
-        if (loginController == null || loginController.getUsername() == null) {
+        if (loginController.getPassword() == null || loginController.getUsername() == null) {
             String contextPath = ((HttpServletRequest)request).getContextPath();
             contextPath = contextPath+"/secured/SessionExpired.xhtml";
             ((HttpServletResponse)response).sendRedirect(contextPath);

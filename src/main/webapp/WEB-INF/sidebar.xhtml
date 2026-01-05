@@ -16,7 +16,7 @@
             <div class="profile">
                 <p:graphicImage name="images/profile.png" library="omega-layout" />
                 <a id="profile-button" href="#">
-                    <span class="username">#{loginController.username}</span>
+                    <span class="username">#{loginController.name}</span>
                     <i class="pi pi-fw pi-cog"/>
                 </a>
                 <ul>
@@ -27,7 +27,7 @@
             </div>
             <div class="menu">
                 <po:menu widgetVar="OmegaMenuWidget">
-                    <p:menuitem id="m_dashboard" value="Dashboard" icon="pi pi-fw pi-home" outcome="/landing"/>
+                    <p:menuitem id="m_scriplist" value="Scripid List" icon="pi pi-fw pi-home" outcome="/secured/ScripList"/>
 <!--                    <p:submenu id="m_components" label="UI Kit" icon="pi pi-fw pi-star" badge="2">
                         <p:menuitem id="m_formlayout" value="Form Layout" icon="pi pi-fw pi-id-card" outcome="/landing"/>
                         

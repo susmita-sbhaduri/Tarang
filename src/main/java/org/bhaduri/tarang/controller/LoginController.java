@@ -23,6 +23,7 @@ import org.bhaduri.tarang.services.MasterDataServices;
 public class LoginController implements Serializable {
     private String username;
     private String password;
+    private String name;
     private UserDTO userDTO;
 
     /**
@@ -37,7 +38,10 @@ public class LoginController implements Serializable {
         userDTO = masterDataService.getUserAuthDetails(username, password);
         if(userDTO.getID().equals("null")){
             return "landing?faces-redirect=true";
-        } else return "/secured/userhome?faces-redirect=true";
+        } else {
+            name = userDTO.getName();
+            return "/secured/userhome?faces-redirect=true";
+        }
     }
     public void logout () {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
@@ -72,6 +76,14 @@ public class LoginController implements Serializable {
 
     public void setUserDTO(UserDTO userDTO) {
         this.userDTO = userDTO;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
     
     
