@@ -25,13 +25,19 @@
                 <p:dataTable id="existingres" var="existingres" 
                              value="#{resourceStock.existingresources}" 
                              reflow="true">
-                    <p:column headerText="Resource Name">
+                    <p:column headerText="Margin">
                         <h:outputText value="#{existingres.resourceName}" />
                     </p:column>
-                    <p:column headerText="Available Amt.">
+                    <p:column headerText="Call One Count">
                         <h:outputText value="#{existingres.availableAmt}" />
                     </p:column>
-                    <p:column headerText="Unit">
+                    <p:column headerText="Call One Percentage">
+                        <h:outputText value="#{existingres.unit}" />
+                    </p:column> 
+                    <p:column headerText="Call Two Count">
+                        <h:outputText value="#{existingres.availableAmt}" />
+                    </p:column>
+                    <p:column headerText="Call Two Percentage">
                         <h:outputText value="#{existingres.unit}" />
                     </p:column> 
                 </p:dataTable>

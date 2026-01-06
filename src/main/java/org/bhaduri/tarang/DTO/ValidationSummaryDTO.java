@@ -10,7 +10,7 @@ import java.io.Serializable;
  *
  * @author sb
  */
-public class ValidationSummary implements Serializable {
+public class ValidationSummaryDTO implements Serializable {
     private String heading;
     private String callOneCount;
     private String callOnePercent;

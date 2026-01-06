@@ -10,5 +10,8 @@
     <named-query name="Calltable.listScripid">
         <query>SELECT DISTINCT c.calltablePK.scripid FROM Calltable c</query>
     </named-query>
+    <named-query name="Validatecall.listCallsForScripid">
+        <query>SELECT v FROM Validatecall v WHERE v.validatecallPK.scripid = :scripid</query>
+    </named-query>
 </entity-mappings>
 
