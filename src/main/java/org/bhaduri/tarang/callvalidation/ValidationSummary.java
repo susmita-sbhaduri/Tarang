@@ -54,72 +54,108 @@ public class ValidationSummary implements Serializable {
             callone = callsperscrip.get(i).getCallOne();
             calltwo = callsperscrip.get(i).getCallTwo();
             price = callsperscrip.get(i).getPrice();
+
             if ((callone.equals("buy") && calltwo.equals("buy"))
-                    || (callone.equals("buy") && calltwo.equals("no"))
-                    || (callone.equals("no") && calltwo.equals("buy"))) {
-                
-                if (callone.equals("buy") && calltwo.equals("buy")) {
+                    || (callone.equals("sell") && calltwo.equals("sell"))) {
+                if (callsperscrip.get(i).getOutcomeOne().equals("fail")) {
+                    failcountone = failcountone + 1;
+                    failcounttwo = failcounttwo + 1;
+                } else {
                     diff = Math.abs(callsperscrip.get(i).getActualPriceOne() - price);
-                    if (diff == price) {
+                    if ((diff / price) <= ((0.2 / 100) * price)) {
+                        rangeonecountone = rangeonecountone + 1;
+                        rangeonecounttwo = rangeonecounttwo + 1;
+                    }
+                    if ((((0.2 / 100) * price) < (diff / price))
+                            && ((diff / price) <= ((0.4 / 100) * price))) {
+                        rangetwocountone = rangetwocountone + 1;
+                        rangetwocounttwo = rangetwocounttwo + 1;
+                    }
+                    if ((diff / price) > ((0.4 / 100) * price)) {
+                        rangethreecountone = rangethreecountone + 1;
+                        rangethreecounttwo = rangethreecounttwo + 1;
+                    }
+                }
+            }
+            
+            if ((callone.equals("buy") && calltwo.equals("sell"))
+                    || (callone.equals("sell") && calltwo.equals("buy"))) {
+                if ((callsperscrip.get(i).getOutcomeOne().equals("fail"))
+                        || (callsperscrip.get(i).getOutcomeTwo().equals("fail"))) {
+                    if (callsperscrip.get(i).getOutcomeOne().equals("fail")) {
                         failcountone = failcountone + 1;
+                    }
+                    if (callsperscrip.get(i).getOutcomeTwo().equals("fail")) {
                         failcounttwo = failcounttwo + 1;
-                    } else {
-                        if((diff/price) <= ((0.2/100)*price)){
-                            rangeonecountone = rangeonecountone+1;
-                            rangeonecounttwo = rangeonecounttwo +1;
+                    }
+
+                } else {
+                    diff = Math.abs(callsperscrip.get(i).getActualPriceOne() - price);
+                    if ((diff / price) <= ((0.2 / 100) * price)) {
+                        if(callsperscrip.get(i).getOutcomeOne().equals("pass")){
+                            rangeonecountone = rangeonecountone + 1;
                         }
-                        if((((0.2/100)*price)< (diff/price)) && 
-                               ((diff/price) <= ((0.4/100)*price))){
-                            rangetwocountone = rangetwocountone+1;
-                            rangetwocounttwo = rangetwocounttwo+1;
-                        }
-                        if((diff/price) > ((0.4/100)*price)){
-                            rangethreecountone = rangethreecountone+1;
-                            rangethreecounttwo = rangethreecounttwo +1;
-                        }
+                        if(callsperscrip.get(i).getOutcomeTwo().equals("pass")){
+                            rangeonecounttwo = rangeonecounttwo + 1;
+                        }    
+                    }
+                    if ((((0.2 / 100) * price) < (diff / price))
+                            && ((diff / price) <= ((0.4 / 100) * price))) {
+                        rangetwocountone = rangetwocountone + 1;
+                        rangetwocounttwo = rangetwocounttwo + 1;
+                    }
+                    if ((diff / price) > ((0.4 / 100) * price)) {
+                        rangethreecountone = rangethreecountone + 1;
+                        rangethreecounttwo = rangethreecounttwo + 1;
                     }
                 }
-                
-                if (callone.equals("buy") && calltwo.equals("no")) {
-                    diff = callsperscrip.get(i).getActualPriceOne() - price;
-                    nacounttwo = nacounttwo + 1;
-                    if (diff == price) {
-                        failcounttwo = failcounttwo + 1;                        
-                    } else {
-                        if((diff/price) <= ((0.2/100)*price)){
-                            rangeonecountone = rangeonecountone+1;
-                        }
-                        if((((0.2/100)*price)< (diff/price)) && 
-                               ((diff/price) <= ((0.4/100)*price))){
-                            rangetwocountone = rangetwocountone+1;
-                        }
-                        if((diff/price) > ((0.4/100)*price)){
-                            rangethreecountone = rangethreecountone+1;
-                        }
+            }
+
+            if ((callone.equals("buy") && calltwo.equals("no"))
+                    || (callone.equals("sell") && calltwo.equals("no"))) {
+                nacounttwo = nacounttwo + 1;
+                if (callsperscrip.get(i).getOutcomeOne().equals("fail")) {
+                    failcountone = failcountone + 1;
+                } else {
+                    diff = Math.abs(callsperscrip.get(i).getActualPriceOne() - price);
+                    if ((diff / price) <= ((0.2 / 100) * price)) {
+                        rangeonecountone = rangeonecountone + 1;
+                    }
+                    if ((((0.2 / 100) * price) < (diff / price))
+                            && ((diff / price) <= ((0.4 / 100) * price))) {
+                        rangetwocountone = rangetwocountone + 1;
+                    }
+                    if ((diff / price) > ((0.4 / 100) * price)) {
+                        rangethreecountone = rangethreecountone + 1;
                     }
                 }
-                
-                if (callone.equals("no") && calltwo.equals("buy")) {
-                    diff = callsperscrip.get(i).getActualPriceTwo() - price;
-                    nacountone = nacountone + 1;
-                    if (diff == 0) {
-                        failcountone = failcountone + 1;                        
-                    } else {
-                        if((diff/price) <= ((0.2/100)*price)){
-                            rangeonecountone = rangeonecountone+1;
-                        }
-                        if((((0.2/100)*price)< (diff/price)) && 
-                               ((diff/price) <= ((0.4/100)*price))){
-                            rangetwocountone = rangetwocountone+1;
-                        }
-                        if((diff/price) > ((0.4/100)*price)){
-                            rangethreecountone = rangethreecountone+1;
-                        }
+            }
+
+            if ((callone.equals("no") && calltwo.equals("buy"))
+                    || (callone.equals("no") && calltwo.equals("sell"))) {
+                nacountone = nacountone + 1;
+                if (callsperscrip.get(i).getOutcomeTwo().equals("fail")) {
+                    failcounttwo = failcounttwo + 1;
+                } else {
+                    diff = Math.abs(callsperscrip.get(i).getActualPriceTwo() - price);
+                    if ((diff / price) <= ((0.2 / 100) * price)) {
+                        rangeonecounttwo = rangeonecounttwo + 1;
+                    }
+                    if ((((0.2 / 100) * price) < (diff / price))
+                            && ((diff / price) <= ((0.4 / 100) * price))) {
+                        rangetwocounttwo = rangetwocounttwo + 1;
+                    }
+                    if ((diff / price) > ((0.4 / 100) * price)) {
+                        rangethreecounttwo = rangethreecounttwo + 1;
                     }
                 }
-            } // buy & buy,  buy & no,  no & buy
-        }
-        
+            }
+            
+            if (callone.equals("no") && calltwo.equals("no")){
+                nacountone = nacountone + 1;
+                nacounttwo = nacounttwo + 1;
+            }
+        } //for loop       
     }
 
     public String getSelectedScrip() {

@@ -22,23 +22,23 @@
                     <p:button outcome="/secured/ScripList" value="back" id="h_buttonid" icon="pi pi-home"/>                    
                     &nbsp;&nbsp;&nbsp;                    
                 </div>
-                <p:dataTable id="existingres" var="existingres" 
-                             value="#{resourceStock.existingresources}" 
+                <p:dataTable id="reportvar" var="reportvar" 
+                             value="#{validationSummary.report}" 
                              reflow="true">
                     <p:column headerText="Margin">
-                        <h:outputText value="#{existingres.resourceName}" />
+                        <h:outputText value="#{reportvar.heading}" />
                     </p:column>
                     <p:column headerText="Call One Count">
-                        <h:outputText value="#{existingres.availableAmt}" />
+                        <h:outputText value="#{reportvar.callOneCount}" />
                     </p:column>
                     <p:column headerText="Call One Percentage">
-                        <h:outputText value="#{existingres.unit}" />
+                        <h:outputText value="#{reportvar.callOnePercent}" />
                     </p:column> 
                     <p:column headerText="Call Two Count">
-                        <h:outputText value="#{existingres.availableAmt}" />
+                        <h:outputText value="#{reportvar.callTwoCount}" />
                     </p:column>
                     <p:column headerText="Call Two Percentage">
-                        <h:outputText value="#{existingres.unit}" />
+                        <h:outputText value="#{reportvar.callTwoPercent}" />
                     </p:column> 
                 </p:dataTable>
             </h:form>
