@@ -10,6 +10,7 @@ import jakarta.persistence.TypedQuery;
 import jakarta.transaction.UserTransaction;
 import java.util.List;
 import org.bhaduri.tarang.JPA.CalltableJpaController;
+import org.bhaduri.tarang.entities.Scrips;
 
 /**
  *
@@ -19,10 +20,10 @@ public class CalltableDAO extends CalltableJpaController{
     public CalltableDAO(UserTransaction utx, EntityManagerFactory emf) {
         super(utx, emf);
     }
-    public List<String> listScripid() {
+    public List<Scrips> listScripid() {
         EntityManager em = getEntityManager();
-        TypedQuery<String> query = em.createNamedQuery("Calltable.listScripid", String.class);
-        List<String> listofcropcat = query.getResultList();
+        TypedQuery<Scrips> query = em.createNamedQuery("Calltable.listScripid", Scrips.class);
+        List<Scrips> listofcropcat = query.getResultList();
         return listofcropcat;
     }
 }

@@ -22,6 +22,7 @@ import org.bhaduri.tarang.services.MasterDataServices;
 @ViewScoped
 public class ValidationSummary implements Serializable {
     private String selectedScrip;
+    private String scripName;
     private List<ValidationSummaryDTO> report;
     /**
      * Creates a new instance of ValidationSummary
@@ -33,8 +34,7 @@ public class ValidationSummary implements Serializable {
         MasterDataServices masterDataService = new MasterDataServices();
         report = new ArrayList<>();
         List<ValidateCall> callsperscrip = masterDataService.getCallsPerScrip(selectedScrip);
-        ValidationSummaryDTO reportRecord = new ValidationSummaryDTO();
-        reportRecord.setHeading("0-0.2(%)");
+        
         String callone;
         String calltwo;
         double price;
@@ -77,7 +77,7 @@ public class ValidationSummary implements Serializable {
                     }
                 }
             }
-            
+//     ###############################       
             if ((callone.equals("buy") && calltwo.equals("sell"))
                     || (callone.equals("sell") && calltwo.equals("buy"))) {
                 if ((callsperscrip.get(i).getOutcomeOne().equals("fail"))
@@ -89,28 +89,38 @@ public class ValidationSummary implements Serializable {
                         failcounttwo = failcounttwo + 1;
                     }
 
-                } else {
-                    diff = Math.abs(callsperscrip.get(i).getActualPriceOne() - price);
-                    if ((diff / price) <= ((0.2 / 100) * price)) {
-                        if(callsperscrip.get(i).getOutcomeOne().equals("pass")){
+                } 
+                if ((callsperscrip.get(i).getOutcomeOne().equals("pass"))
+                        || (callsperscrip.get(i).getOutcomeTwo().equals("pass"))) {
+                    if (callsperscrip.get(i).getOutcomeOne().equals("pass")) {
+                        diff = Math.abs(callsperscrip.get(i).getActualPriceOne() - price);
+                        if ((diff / price) <= ((0.2 / 100) * price)) {
                             rangeonecountone = rangeonecountone + 1;
                         }
-                        if(callsperscrip.get(i).getOutcomeTwo().equals("pass")){
+                        if ((((0.2 / 100) * price) < (diff / price))
+                                && ((diff / price) <= ((0.4 / 100) * price))) {
+                            rangetwocountone = rangetwocountone + 1;
+                        }
+                        if ((diff / price) > ((0.4 / 100) * price)) {
+                            rangethreecountone = rangethreecountone + 1;
+                        }
+                    }
+                    if (callsperscrip.get(i).getOutcomeTwo().equals("pass")) {
+                        diff = Math.abs(callsperscrip.get(i).getActualPriceTwo() - price);
+                        if ((diff / price) <= ((0.2 / 100) * price)) {
                             rangeonecounttwo = rangeonecounttwo + 1;
-                        }    
-                    }
-                    if ((((0.2 / 100) * price) < (diff / price))
-                            && ((diff / price) <= ((0.4 / 100) * price))) {
-                        rangetwocountone = rangetwocountone + 1;
-                        rangetwocounttwo = rangetwocounttwo + 1;
-                    }
-                    if ((diff / price) > ((0.4 / 100) * price)) {
-                        rangethreecountone = rangethreecountone + 1;
-                        rangethreecounttwo = rangethreecounttwo + 1;
+                        }
+                        if ((((0.2 / 100) * price) < (diff / price))
+                                && ((diff / price) <= ((0.4 / 100) * price))) {
+                            rangetwocounttwo = rangetwocounttwo + 1;
+                        }
+                        if ((diff / price) > ((0.4 / 100) * price)) {
+                            rangethreecounttwo = rangethreecounttwo + 1;
+                        }
                     }
                 }
             }
-
+//     ###############################
             if ((callone.equals("buy") && calltwo.equals("no"))
                     || (callone.equals("sell") && calltwo.equals("no"))) {
                 nacounttwo = nacounttwo + 1;
@@ -130,7 +140,7 @@ public class ValidationSummary implements Serializable {
                     }
                 }
             }
-
+//     ###############################
             if ((callone.equals("no") && calltwo.equals("buy"))
                     || (callone.equals("no") && calltwo.equals("sell"))) {
                 nacountone = nacountone + 1;
@@ -150,12 +160,90 @@ public class ValidationSummary implements Serializable {
                     }
                 }
             }
-            
+//     ###############################            
             if (callone.equals("no") && calltwo.equals("no")){
                 nacountone = nacountone + 1;
                 nacounttwo = nacounttwo + 1;
             }
-        } //for loop       
+        } //for loop for a single scrip
+        double ratio = (double) rangeonecountone / callsperscrip.size();
+        String formattedRatio = String.format("%.2f", ratio*100);
+        ValidationSummaryDTO reportRecord = new ValidationSummaryDTO();
+        reportRecord.setHeading("0-0.2(%)");
+        reportRecord.setCallOneCount(String.valueOf(rangeonecountone));
+        reportRecord.setCallOnePercent(formattedRatio+"%");
+        ratio = (double) rangeonecounttwo / callsperscrip.size();
+        formattedRatio = String.format("%.2f", ratio*100);
+        reportRecord.setCallTwoCount(String.valueOf(rangeonecounttwo));
+        reportRecord.setCallTwoPercent(formattedRatio+"%");
+        report.add(reportRecord);
+        
+        ratio = (double) rangetwocountone / callsperscrip.size();
+        formattedRatio = String.format("%.2f", ratio*100);
+        reportRecord = new ValidationSummaryDTO();
+        reportRecord.setHeading("0.2-0.4(%)");
+        reportRecord.setCallOneCount(String.valueOf(rangetwocountone));
+        reportRecord.setCallOnePercent(formattedRatio+"%");
+        ratio = (double) rangetwocounttwo / callsperscrip.size();
+        formattedRatio = String.format("%.2f", ratio*100);
+        reportRecord.setCallTwoCount(formattedRatio+"%");
+        reportRecord.setCallTwoPercent(String.valueOf(ratio*100));
+        report.add(reportRecord);
+        
+        
+        ratio = (double) rangethreecountone / callsperscrip.size();
+        formattedRatio = String.format("%.2f", ratio*100);
+        reportRecord = new ValidationSummaryDTO();
+        reportRecord.setHeading("> 0.4(%)");
+        reportRecord.setCallOneCount(String.valueOf(rangethreecountone));
+        reportRecord.setCallOnePercent(formattedRatio+"%");
+        ratio = (double) rangethreecounttwo / callsperscrip.size();
+        formattedRatio = String.format("%.2f", ratio*100);
+        reportRecord.setCallTwoCount(String.valueOf(rangethreecounttwo));
+        reportRecord.setCallTwoPercent(formattedRatio+"%");
+        report.add(reportRecord);
+        
+        ratio = (double) nacountone / callsperscrip.size();
+        formattedRatio = String.format("%.2f", ratio*100);
+        reportRecord = new ValidationSummaryDTO();
+        reportRecord.setHeading("Undefined");
+        reportRecord.setCallOneCount(String.valueOf(nacountone));
+        reportRecord.setCallOnePercent(formattedRatio+"%");
+        ratio = (double) nacounttwo / callsperscrip.size();
+        formattedRatio = String.format("%.2f", ratio*100);
+        reportRecord.setCallTwoCount(String.valueOf(nacounttwo));
+        reportRecord.setCallTwoPercent(formattedRatio+"%");
+        report.add(reportRecord);
+        
+        ratio = (double) failcountone / callsperscrip.size();
+        formattedRatio = String.format("%.2f", ratio*100);
+        reportRecord = new ValidationSummaryDTO();
+        reportRecord.setHeading("Failed");
+        reportRecord.setCallOneCount(String.valueOf(failcountone));
+        reportRecord.setCallOnePercent(formattedRatio+"%");
+        ratio = (double) failcounttwo / callsperscrip.size();
+        formattedRatio = String.format("%.2f", ratio*100);
+        reportRecord.setCallTwoCount(String.valueOf(failcounttwo));
+        reportRecord.setCallTwoPercent(formattedRatio+"%");
+        report.add(reportRecord);
+        
+        
+        
+        ratio = (double) (rangeonecountone+rangetwocountone+rangethreecountone) 
+                / callsperscrip.size();
+        formattedRatio = String.format("%.2f", ratio*100);
+        
+        reportRecord = new ValidationSummaryDTO();
+        reportRecord.setHeading("Total Success");
+        reportRecord.setCallOneCount("--");
+        reportRecord.setCallOnePercent(formattedRatio+"%");
+        reportRecord.setCallTwoCount("--");
+        ratio = (double) (rangeonecounttwo+rangetwocounttwo+rangethreecounttwo) 
+                / callsperscrip.size();
+        formattedRatio = String.format("%.2f", ratio*100);
+        
+        reportRecord.setCallTwoPercent(formattedRatio+"%");
+        report.add(reportRecord);
     }
 
     public String getSelectedScrip() {
@@ -172,6 +260,14 @@ public class ValidationSummary implements Serializable {
 
     public void setReport(List<ValidationSummaryDTO> report) {
         this.report = report;
+    }
+
+    public String getScripName() {
+        return scripName;
+    }
+
+    public void setScripName(String scripName) {
+        this.scripName = scripName;
     }
     
     

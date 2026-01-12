@@ -9,7 +9,11 @@ import jakarta.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.naming.NamingException;
-import org.bhaduri.tarang.services.MasterDataServices;
+//import org.bhaduri.tarang.DTO.ScripDTO;
+//import org.bhaduri.tarang.services.MasterDataServices;
+import org.bhaduri.tarangdbservice.services.MasterDataServices;
+import org.bhaduri.tarangdto.ScripsDTO;
+import org.bhaduri.tarangcall.scrips.Scrips;
 
 /**
  *
@@ -18,8 +22,8 @@ import org.bhaduri.tarang.services.MasterDataServices;
 @Named(value = "scripList")
 @ViewScoped
 public class ScripList implements Serializable {
-    private String selectedScrip;
-    List<String> scriplist;
+    private ScripsDTO selectedScrip;
+    List<ScripsDTO> scriplist;
     /**
      * Creates a new instance of ScripList
      */
@@ -27,29 +31,34 @@ public class ScripList implements Serializable {
     }
     public void fillScripValues() throws NamingException {
         MasterDataServices masterDataService = new MasterDataServices();
-        scriplist = masterDataService.getCallScripIdList();
-        
+//        scriplist = masterDataService.getCallScripIdList();
+        scriplist = new Scrips().getScripList();
     }
     
     public String goToScripDetails() {        
-        String redirectUrl = "/secured/validationsummary?faces-redirect=true&selectedScrip="+ selectedScrip;
+        String redirectUrl = "/secured/validationsummary?faces-redirect=true&selectedScrip="+ 
+                selectedScrip.getScripId() + "&scripName=" + selectedScrip.getScripName();
         return redirectUrl;
 //        return "/secured/userhome";
     }
-    public String getSelectedScrip() {
+
+    public ScripsDTO getSelectedScrip() {
         return selectedScrip;
     }
 
-    public void setSelectedScrip(String selectedScrip) {
+    public void setSelectedScrip(ScripsDTO selectedScrip) {
         this.selectedScrip = selectedScrip;
     }
 
-    public List<String> getScriplist() {
+    public List<ScripsDTO> getScriplist() {
         return scriplist;
     }
 
-    public void setScriplist(List<String> scriplist) {
+    public void setScriplist(List<ScripsDTO> scriplist) {
         this.scriplist = scriplist;
     }
+
+    
+    
     
 }

@@ -8,36 +8,37 @@
                 xmlns:h="jakarta.faces.html">
 
     <ui:define name="content">
-        <h4>Stock of Resource.</h4>
+        <h4>#{validationSummary.scripName}</h4>
         <p:growl id="growl" showDetail="true" />
        
         <f:metadata>
             <f:viewParam name="selectedScrip" value="#{validationSummary.selectedScrip}"></f:viewParam>
+            <f:viewParam name="scripName" value="#{validationSummary.scripName}"></f:viewParam>
             <f:viewAction action="#{validationSummary.fillValues()}" />
         </f:metadata>
 
         <div class="card">            
             <h:form id="validationgrid" style="text-align: center">  
                 <div style="text-align: left;">
-                    <p:button outcome="/secured/ScripList" value="back" id="h_buttonid" icon="pi pi-home"/>                    
+                    <p:button outcome="/secured/ScripList" value="back" id="h_buttonid" />                    
                     &nbsp;&nbsp;&nbsp;                    
                 </div>
                 <p:dataTable id="reportvar" var="reportvar" 
                              value="#{validationSummary.report}" 
                              reflow="true">
-                    <p:column headerText="Margin">
+                    <p:column headerText="Success Margin">
                         <h:outputText value="#{reportvar.heading}" />
                     </p:column>
-                    <p:column headerText="Call One Count">
+                    <p:column headerText="Raw-fibo Fractal Count">
                         <h:outputText value="#{reportvar.callOneCount}" />
                     </p:column>
-                    <p:column headerText="Call One Percentage">
+                    <p:column headerText="Success(%)">
                         <h:outputText value="#{reportvar.callOnePercent}" />
                     </p:column> 
-                    <p:column headerText="Call Two Count">
+                    <p:column headerText="Tuned-fibo Fractal Count">
                         <h:outputText value="#{reportvar.callTwoCount}" />
                     </p:column>
-                    <p:column headerText="Call Two Percentage">
+                    <p:column headerText="Success(%)">
                         <h:outputText value="#{reportvar.callTwoPercent}" />
                     </p:column> 
                 </p:dataTable>

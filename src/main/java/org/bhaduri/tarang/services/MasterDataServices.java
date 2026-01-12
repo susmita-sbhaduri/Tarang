@@ -20,6 +20,7 @@ import org.bhaduri.tarang.DA.CalltableDAO;
 import org.bhaduri.tarang.DA.UserDAO;
 import org.bhaduri.tarang.DA.ValidatecallDAO;
 import org.bhaduri.tarang.DTO.CallTable;
+import org.bhaduri.tarang.DTO.ScripDTO;
 
 import org.bhaduri.tarang.DTO.UserDTO;
 import org.bhaduri.tarang.DTO.ValidateCall;
@@ -59,21 +60,29 @@ public class MasterDataServices {
         }
     }
     
-    public List<String> getCallScripIdList() {
-        CalltableDAO calltable = new CalltableDAO(utx,emf);
-        try {   
-            List<String> scriplist = calltable.listScripid();            
-            return scriplist;
-        }
-        catch (NoResultException e) {
-            System.out.println("No record found.");           
-            return null;
-        }
-        catch (Exception exception) {
-            System.out.println(exception + " has occurred in getCallScripIdList.");
-            return null;
-        }
-    }
+//    public List<ScripDTO> getCallScripIdList() {
+//        CalltableDAO calltable = new CalltableDAO(utx,emf);
+//        List<ScripDTO> recordList = new ArrayList<>();
+//        ScripDTO record = new ScripDTO();
+//        try {   
+//            List<Scrips> scriplist = calltable.listScripid(); 
+//            for (int i = 0; i < scriplist.size(); i++) {
+//                record.setScripId(scriplist.get(i).getScripid());
+//                record.setScripName(scriplist.get(i).getScripname());
+//                recordList.add(record);
+//                record = new ScripDTO();
+//            }
+//            return recordList;
+//        }
+//        catch (NoResultException e) {
+//            System.out.println("No record found.");           
+//            return null;
+//        }
+//        catch (Exception exception) {
+//            System.out.println(exception + " has occurred in getCallScripIdList.");
+//            return null;
+//        }
+//    }
     
     public List<ValidateCall> getCallsPerScrip(String scripid) {
         ValidatecallDAO validcalldao = new ValidatecallDAO(utx,emf);
