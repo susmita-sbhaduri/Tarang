@@ -14,6 +14,8 @@ public class ScripDTO implements Serializable {
     private String scripId;
     private String scripName;
 
+    
+
     public String getScripId() {
         return scripId;
     }

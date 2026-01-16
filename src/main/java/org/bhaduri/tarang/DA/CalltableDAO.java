@@ -20,10 +20,5 @@ public class CalltableDAO extends CalltableJpaController{
     public CalltableDAO(UserTransaction utx, EntityManagerFactory emf) {
         super(utx, emf);
     }
-    public List<Scrips> listScripid() {
-        EntityManager em = getEntityManager();
-        TypedQuery<Scrips> query = em.createNamedQuery("Calltable.listScripid", Scrips.class);
-        List<Scrips> listofcropcat = query.getResultList();
-        return listofcropcat;
-    }
+
 }

@@ -9,11 +9,9 @@ import jakarta.faces.view.ViewScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.naming.NamingException;
-//import org.bhaduri.tarang.DTO.ScripDTO;
-//import org.bhaduri.tarang.services.MasterDataServices;
-import org.bhaduri.tarangdbservice.services.MasterDataServices;
-import org.bhaduri.tarangdto.ScripsDTO;
-import org.bhaduri.tarangcall.scrips.Scrips;
+import org.bhaduri.tarang.DTO.ScripDTO;
+import org.bhaduri.tarang.services.MasterDataServices;
+
 
 /**
  *
@@ -22,8 +20,8 @@ import org.bhaduri.tarangcall.scrips.Scrips;
 @Named(value = "scripList")
 @ViewScoped
 public class ScripList implements Serializable {
-    private ScripsDTO selectedScrip;
-    List<ScripsDTO> scriplist;
+    private ScripDTO selectedScrip;
+    List<ScripDTO> scriplist;
     /**
      * Creates a new instance of ScripList
      */
@@ -32,7 +30,7 @@ public class ScripList implements Serializable {
     public void fillScripValues() throws NamingException {
         MasterDataServices masterDataService = new MasterDataServices();
 //        scriplist = masterDataService.getCallScripIdList();
-        scriplist = new Scrips().getScripList();
+        scriplist = masterDataService.getScripsList();
     }
     
     public String goToScripDetails() {        
@@ -42,23 +40,20 @@ public class ScripList implements Serializable {
 //        return "/secured/userhome";
     }
 
-    public ScripsDTO getSelectedScrip() {
+    public ScripDTO getSelectedScrip() {
         return selectedScrip;
     }
 
-    public void setSelectedScrip(ScripsDTO selectedScrip) {
+    public void setSelectedScrip(ScripDTO selectedScrip) {
         this.selectedScrip = selectedScrip;
     }
 
-    public List<ScripsDTO> getScriplist() {
+    public List<ScripDTO> getScriplist() {
         return scriplist;
     }
 
-    public void setScriplist(List<ScripsDTO> scriplist) {
+    public void setScriplist(List<ScripDTO> scriplist) {
         this.scriplist = scriplist;
     }
-
-    
-    
     
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="jakarta.faces.facelets"
-                template="./../WEB-INF/template.xhtml"                
+                template="./../WEB-INF/template.xhtml"                               
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="jakarta.faces.core"
                 xmlns:h="jakarta.faces.html">
@@ -12,9 +12,9 @@
         <p:growl id="growl" showDetail="true" />
 
         <f:metadata>
-            <f:viewParam name="selectedScrip" value="#{validationSummary.selectedScrip}"></f:viewParam>
-            <f:viewParam name="scripName" value="#{validationSummary.scripName}"></f:viewParam>
-            <f:viewAction action="#{validationSummary.fillValues()}" />
+            <f:viewParam name="selectedScrip" value="#{validationPerScrip.selectedScrip}"></f:viewParam>
+            <f:viewParam name="scripName" value="#{validationPerScrip.scripName}"></f:viewParam>
+            <f:viewAction action="#{validationPerScrip.fillValues()}" />
         </f:metadata>
 
         <div class="card">            
@@ -23,15 +23,7 @@
                     <p:button outcome="/secured/ScripList" value="back" id="h_buttonid" />                    
                     &nbsp;&nbsp;&nbsp;                    
                 </div>
-                <!-- 4 Pie Charts: 2 rows x 2 columns -->
-                <p:panelGrid columns="2" layout="grid" style="width:100%; margin-bottom:20px;">
-                    <p:chart value="#{validationSummary.callOneSuccFail}" style="width: 100%; height: 400px;"/>
-                    <p:chart value="#{validationSummary.callOneRanges}" style="width: 100%; height: 400px;"/>
-                    <p:chart value="#{validationSummary.callTwoSuccFail}" style="width: 100%; height: 400px;"/>
-                    <p:chart value="#{validationSummary.callTwoRanges}" style="width: 100%; height: 400px;"/>
-                </p:panelGrid>
-
-
+                
                 <p:dataTable id="reportvar" var="reportvar" 
                              value="#{validationSummary.report}" 
                              reflow="true">

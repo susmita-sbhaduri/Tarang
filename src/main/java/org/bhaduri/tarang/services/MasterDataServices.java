@@ -14,9 +14,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import org.bhaduri.tarang.DA.CalltableDAO;
+import org.bhaduri.tarang.DA.ScripsDA;
 import org.bhaduri.tarang.DA.UserDAO;
 import org.bhaduri.tarang.DA.ValidatecallDAO;
 import org.bhaduri.tarang.DTO.CallTable;
@@ -25,6 +27,7 @@ import org.bhaduri.tarang.DTO.ScripDTO;
 import org.bhaduri.tarang.DTO.UserDTO;
 import org.bhaduri.tarang.DTO.ValidateCall;
 import org.bhaduri.tarang.entities.Calltable;
+import org.bhaduri.tarang.entities.Scrips;
 import org.bhaduri.tarang.entities.Users;
 import org.bhaduri.tarang.entities.Validatecall;
 /**
@@ -56,6 +59,32 @@ public class MasterDataServices {
         }
         catch (Exception exception) {
             System.out.println(exception + " has occurred in getUserAuthDetails.");
+            return null;
+        }
+    }
+    
+    public List<ScripDTO> getScripsList() {
+        ScripsDA scripsDA = new ScripsDA(utx,emf);
+        
+//        List<ScripDTO> scripsDTOList = scripses.stream().map(s -> new ScripDTO(s.getScripid(), s.getScripname())).collect(Collectors.toList());
+        List<ScripDTO> scripsDTOList = new ArrayList<>();
+        ScripDTO record = new ScripDTO();
+        try {   
+            List<Scrips> scripses = scripsDA.listScripid(); 
+            for (int i = 0; i < scripses.size(); i++) {
+                record.setScripId(scripses.get(i).getScripid());
+                record.setScripName(scripses.get(i).getScripname());
+                scripsDTOList.add(record);
+                record = new ScripDTO();
+            }
+            return scripsDTOList;
+        }
+        catch (NoResultException e) {
+            System.out.println("No record found.");           
+            return null;
+        }
+        catch (Exception exception) {
+            System.out.println(exception + " has occurred in getCallScripIdList.");
             return null;
         }
     }

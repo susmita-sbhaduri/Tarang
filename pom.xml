@@ -36,6 +36,11 @@
             <classifier>jakarta</classifier>
         </dependency>
         <dependency>
+            <groupId>software.xdev</groupId>
+            <artifactId>chartjs-java-model</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+        <dependency>
             <groupId>org.primefaces.omega</groupId>
             <artifactId>omega</artifactId>
             <version>6.0.0</version>

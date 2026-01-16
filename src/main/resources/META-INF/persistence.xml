@@ -6,5 +6,6 @@
     <class>org.bhaduri.tarang.entities.Calltable</class>
     <class>org.bhaduri.tarang.entities.Users</class>
     <class>org.bhaduri.tarang.entities.Validatecall</class>
+    <class>org.bhaduri.tarang.entities.Scrips</class>
   </persistence-unit>
 </persistence>
