@@ -24,33 +24,44 @@
                     &nbsp;&nbsp;&nbsp;                    
                 </div>
                 
-                <p:dataTable id="reportvar" var="reportvar" 
-                             value="#{validationSummary.report}" 
-                             reflow="true">
-                    <p:column headerText="Success Margin">
-                        <h:outputText value="#{reportvar.heading}" />
+                <p:dataTable id="validationlist" var="rowdetails" 
+                             value="#{validationPerScrip.callsperscrip}">
+                    <p:column headerText="Date">
+                        <h:outputText value="#{rowdetails.callGenerationTimeStamp}">
+                            <f:convertDateTime pattern="yyyy-MMM-dd" />
+                        </h:outputText>
                     </p:column>
-                    <p:column headerText="Raw-fibo Fractal Count">
-                        <h:outputText value="#{reportvar.callOneCount}" />
+                    <p:column headerText="Call Price">
+                        <h:outputText value="#{rowdetails.price}" />
                     </p:column>
-                    <p:column headerText="Success(%)">
-                        <h:outputText value="#{reportvar.callOnePercent}" />
+                    <p:column headerText="Raw Fibo-Fractal Call">
+                        <h:outputText value="#{rowdetails.callOne eq 'buy' ? 'Buy' : (rowdetails.callOne eq 'sell' ? 'Sell': 
+                                               (rowdetails.callOne eq 'no' ? 'Undefined' : ''))}" />
+                        
                     </p:column> 
-                    <p:column headerText="Tuned-fibo Fractal Count">
-                        <h:outputText value="#{reportvar.callTwoCount}" />
+                    <p:column headerText="Max/Min Price Reached">
+                        <h:outputText value="#{rowdetails.actualPriceOne}" />
                     </p:column>
-                    <p:column headerText="Success(%)">
-                        <h:outputText value="#{reportvar.callTwoPercent}" />
+                    <p:column headerText="Outcome">
+                        <h:outputText value="#{rowdetails.outcomeOne eq 'pass' ? 'Pass' : (rowdetails.outcomeOne eq 'fail' ? 'Fail': 
+                                               (rowdetails.outcomeOne eq 'NA' ? 'NA' : ''))}" 
+                        style="#{rowdetails.outcomeOne eq 'pass' ? 'color: green; font-weight: bold;' : 
+                      rowdetails.outcomeOne eq 'fail' ? 'color: red; font-weight: bold;' : 'color: black; font-weight: bold;'}"/>
                     </p:column> 
-                </p:dataTable>
-                
-                    <h:panelGroup style="width:100%; text-align:center; padding:15px;">
-                        <p:commandButton styleClass="blue-button" 
-                                         value="Validation Details"
-                                         action="#{validationSummary.showDetails()}"
-                                         process="@this @form"
-                                         update="@form" />
-                    </h:panelGroup>
+                    <p:column headerText="Tuned Fibo-Fractal Call">                        
+                        <h:outputText value="#{rowdetails.callTwo eq 'buy' ? 'Buy' : (rowdetails.callTwo eq 'sell' ? 'Sell': 
+                                               (rowdetails.callTwo eq 'no' ? 'Undefined' : ''))}" />
+                    </p:column> 
+                    <p:column headerText="Max/Min Price Reached">
+                        <h:outputText value="#{rowdetails.actualPriceTwo}" />
+                    </p:column>
+                    <p:column headerText="Outcome">
+                        <h:outputText value="#{rowdetails.outcomeTwo eq 'pass' ? 'Pass' : (rowdetails.outcomeTwo eq 'fail' ? 'Fail': 
+                                               (rowdetails.outcomeTwo eq 'NA' ? 'NA' : ''))}" 
+                                      style="#{rowdetails.outcomeTwo eq 'pass' ? 'color: green; font-weight: bold;' : 
+                      rowdetails.outcomeTwo eq 'fail' ? 'color: red; font-weight: bold;' : 'color: black; font-weight: bold;'}"/>
+                    </p:column>
+                </p:dataTable>               
                 
             </h:form>
         </div>
