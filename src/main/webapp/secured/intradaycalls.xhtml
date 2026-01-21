@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="jakarta.faces.facelets"
+                template="./../WEB-INF/template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="jakarta.faces.core"
+                xmlns:h="jakarta.faces.html">
+
+   <ui:define name="content">
+        <h4>#{intradayCalls.dateHeading}</h4>
+        <p:growl id="growl" showDetail="true" />
+        
+        <f:metadata>
+            <f:viewAction action="#{intradayCalls.fillScripValues()}" />
+        </f:metadata>
+        <div class="card">            
+            <h:form id="datelist" style="text-align: center">                
+                <p:dataTable var="date" value="#{intradayCalls.intraDateList}" 
+                             reflow="true">
+                    <p:column headerText="Date List">
+                        <h:outputText value="#{date}">
+                        <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss.SSS" timeZone="Asia/Kolkata" />
+                        </h:outputText>
+                    </p:column>
+                                
+                    <p:column>
+                        <p:commandButton styleClass="blue-button" 
+                                         value="Submit"
+                                         action="#{intradayCalls.goToCallDetails()}" >
+                            <f:setPropertyActionListener value="#{date}" target="#{intradayCalls.selectedTime}" />
+                        </p:commandButton>
+                    </p:column>                    
+                </p:dataTable>
+            </h:form>
+        </div>
+    </ui:define>    
+</ui:composition>
+

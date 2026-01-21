@@ -13,5 +13,11 @@
     <named-query name="Validatecall.listCallsForScripid">
         <query>SELECT v FROM Validatecall v WHERE v.validatecallPK.scripid = :scripid</query>
     </named-query>
+    <named-query name="Calltable.listIntradayDates">
+        <query>SELECT DISTINCT c.calltablePK.lastupdateminute FROM Calltable c WHERE c.calltablePK.lastupdateminute &gt; :cutoffdate</query>
+    </named-query>
+    <named-query name="Calltable.listIntradayCalls">
+        <query>SELECT c FROM Calltable c WHERE c.calltablePK.lastupdateminute = :lastupdateminute</query>
+    </named-query>
 </entity-mappings>
 

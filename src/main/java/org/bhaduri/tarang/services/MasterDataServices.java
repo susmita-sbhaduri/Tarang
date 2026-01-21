@@ -27,6 +27,7 @@ import org.bhaduri.tarang.DTO.ScripDTO;
 import org.bhaduri.tarang.DTO.UserDTO;
 import org.bhaduri.tarang.DTO.ValidateCall;
 import org.bhaduri.tarang.entities.Calltable;
+import org.bhaduri.tarang.entities.CalltablePK;
 import org.bhaduri.tarang.entities.Scrips;
 import org.bhaduri.tarang.entities.Users;
 import org.bhaduri.tarang.entities.Validatecall;
@@ -140,6 +141,55 @@ public class MasterDataServices {
         }
         catch (Exception exception) {
             System.out.println(exception + " has occurred in getCallsPerScrip(String scripid).");
+            return null;
+        }
+    }
+    
+    public List<Date> getIntraDateList(Date todaydate) {
+        CalltableDAO calldao = new CalltableDAO(utx,emf);
+        
+        List<Date> recordList = new ArrayList<>();
+        try {   
+            recordList = calldao.listIntradayDates(todaydate);
+            return recordList;
+        }
+        catch (NoResultException e) {
+            System.out.println("No record found for this todaydate.");           
+            return null;
+        }
+        catch (Exception exception) {
+            System.out.println(exception + " has occurred in getIntraDateList.");
+            return null;
+        }
+    }
+    
+    public List<CallTable> getIntraCallList(Date datetimeinput) {
+        CalltableDAO calldao = new CalltableDAO(utx,emf);
+        CallTable record = new CallTable();
+        List<CallTable> recordList = new ArrayList<>();
+        try {  
+            List<Calltable> calllist = calldao.listIntradayCalls(datetimeinput);
+            for (int i = 0; i < calllist.size(); i++) {
+                record.setScripId(calllist.get(i).getCalltablePK().getScripid());
+                record.setCallGenerationTimeStamp(calllist.get(i).getCalltablePK()
+                        .getLastupdateminute());
+                record.setCallVersionOne(calllist.get(i).getCallone());
+                record.setCallVersionTwo(calllist.get(i).getCalltwo());
+                record.setCallVersionThree(calllist.get(i).getCallthree());
+                record.setRetraceVersionOne(calllist.get(i).getRetraceone());
+                record.setRetraceVersionTwo(calllist.get(i).getRetracetwo());
+                record.setCallGenerationPrice(calllist.get(i).getPrice());
+                recordList.add(record);
+                record = new CallTable();
+            }
+            return recordList;
+        }
+        catch (NoResultException e) {
+            System.out.println("No record found for this datetimeinput.");           
+            return null;
+        }
+        catch (Exception exception) {
+            System.out.println(exception + " has occurred in getIntraCallList.");
             return null;
         }
     }
