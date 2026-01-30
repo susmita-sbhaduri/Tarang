@@ -18,15 +18,15 @@
             <h:form id="datelist" style="text-align: center">                
                 <p:dataTable var="date" value="#{intradayCalls.intraDateList}" 
                              reflow="true">
-                    <p:column headerText="Date List">
+                    <p:column headerText="Time List">
                         <h:outputText value="#{date}">
-                        <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss.SSS" timeZone="Asia/Kolkata" />
+                        <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" timeZone="Asia/Kolkata" />
                         </h:outputText>
                     </p:column>
                                 
                     <p:column>
                         <p:commandButton styleClass="blue-button" 
-                                         value="Submit"
+                                         value="See Calls"
                                          action="#{intradayCalls.goToCallDetails()}" >
                             <f:setPropertyActionListener value="#{date}" target="#{intradayCalls.selectedTime}" />
                         </p:commandButton>

@@ -193,4 +193,35 @@ public class MasterDataServices {
             return null;
         }
     }
+    
+    public List<CallTable> getDayCallList(Date today, Date yday) {
+        CalltableDAO calldao = new CalltableDAO(utx,emf);
+        CallTable record = new CallTable();
+        List<CallTable> recordList = new ArrayList<>();
+        try {  
+            List<Calltable> calllist = calldao.listDayCalls(today, yday);
+            for (int i = 0; i < calllist.size(); i++) {
+                record.setScripId(calllist.get(i).getCalltablePK().getScripid());
+                record.setCallGenerationTimeStamp(calllist.get(i).getCalltablePK()
+                        .getLastupdateminute());
+                record.setCallVersionOne(calllist.get(i).getCallone());
+                record.setCallVersionTwo(calllist.get(i).getCalltwo());
+                record.setCallVersionThree(calllist.get(i).getCallthree());
+                record.setRetraceVersionOne(calllist.get(i).getRetraceone());
+                record.setRetraceVersionTwo(calllist.get(i).getRetracetwo());
+                record.setCallGenerationPrice(calllist.get(i).getPrice());
+                recordList.add(record);
+                record = new CallTable();
+            }
+            return recordList;
+        }
+        catch (NoResultException e) {
+            System.out.println("No record found for today calls.");           
+            return null;
+        }
+        catch (Exception exception) {
+            System.out.println(exception + " has occurred in getDayCallList.");
+            return null;
+        }
+    }
 }

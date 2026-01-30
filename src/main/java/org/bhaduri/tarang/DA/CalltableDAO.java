@@ -37,5 +37,13 @@ public class CalltableDAO extends CalltableJpaController{
         query.setParameter("lastupdateminute", dateinput);
         return query.getResultList();
     }
+    
+    public List<Calltable> listDayCalls(Date dateinputone, Date dateinputtwo) {
+        EntityManager em = getEntityManager();
+        TypedQuery<Calltable> query = em.createNamedQuery("Calltable.listDayCalls", Calltable.class);
+        query.setParameter("dateone", dateinputone);
+        query.setParameter("datetwo", dateinputtwo);
+        return query.getResultList();
+    }
 
 }
