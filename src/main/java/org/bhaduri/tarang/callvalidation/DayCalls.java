@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 import javax.naming.NamingException;
 import org.bhaduri.tarang.DTO.CallTable;
 import org.bhaduri.tarang.services.MasterDataServices;
@@ -31,7 +32,7 @@ public class DayCalls implements Serializable {
     public void fillValues() throws NamingException {
         MasterDataServices masterDataService = new MasterDataServices();
         
-        Calendar cal = Calendar.getInstance();        
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Kolkata"));        
         cal.set(Calendar.HOUR_OF_DAY, 0);
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.SECOND, 0);
@@ -40,7 +41,8 @@ public class DayCalls implements Serializable {
         
         cal.add(Calendar.DAY_OF_MONTH, -1);
         Date yday = cal.getTime();
-        dayCallist = masterDataService.getDayCallList(today, yday);       
+//        dayCallist = masterDataService.getDayCallList(today, yday);  
+        dayCallist = masterDataService.getDayCallList(today);
         
     }
 

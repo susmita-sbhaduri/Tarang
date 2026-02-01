@@ -194,12 +194,14 @@ public class MasterDataServices {
         }
     }
     
-    public List<CallTable> getDayCallList(Date today, Date yday) {
+//    public List<CallTable> getDayCallList(Date today, Date yday) {
+    public List<CallTable> getDayCallList(Date today) {
         CalltableDAO calldao = new CalltableDAO(utx,emf);
         CallTable record = new CallTable();
         List<CallTable> recordList = new ArrayList<>();
         try {  
-            List<Calltable> calllist = calldao.listDayCalls(today, yday);
+//            List<Calltable> calllist = calldao.listDayCalls(today, yday);
+            List<Calltable> calllist = calldao.listDayCalls(today);
             for (int i = 0; i < calllist.size(); i++) {
                 record.setScripId(calllist.get(i).getCalltablePK().getScripid());
                 record.setCallGenerationTimeStamp(calllist.get(i).getCalltablePK()

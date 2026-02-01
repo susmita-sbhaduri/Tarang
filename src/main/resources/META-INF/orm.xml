@@ -19,8 +19,12 @@
     <named-query name="Calltable.listIntradayCalls">
         <query>SELECT c FROM Calltable c WHERE c.calltablePK.lastupdateminute = :lastupdateminute</query>
     </named-query>
-    <named-query name="Calltable.listDayCalls">
+<!--    <named-query name="Calltable.listDayCalls">
         <query>SELECT c FROM Calltable c WHERE c.calltablePK.lastupdateminute &lt; :dateone AND c.calltablePK.lastupdateminute &gt; :datetwo</query>
+    </named-query>-->
+    
+    <named-query name="Calltable.listDayCalls">
+        <query>SELECT c FROM Calltable c WHERE c.calltablePK.lastupdateminute &lt; :dateone ORDER BY c.calltablePK.lastupdateminute DESC</query>
     </named-query>
 </entity-mappings>
 

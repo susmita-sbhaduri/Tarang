@@ -10,7 +10,7 @@
     <ui:define name="content">
         <h4>For Day 
             <h:outputText value="#{dayCalls.today}">
-                <f:convertDateTime pattern="yyyy-MMM-dd" />
+                <f:convertDateTime pattern="yyyy-MMM-dd" timeZone="Asia/Kolkata"/>
             </h:outputText>
         </h4>
         <p:growl id="growl" showDetail="true" />
