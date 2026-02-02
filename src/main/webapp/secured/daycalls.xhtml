@@ -10,7 +10,7 @@
     <ui:define name="content">
         <h4>For Day 
             <h:outputText value="#{dayCalls.today}">
-                <f:convertDateTime pattern="yyyy-MMM-dd" timeZone="Asia/Kolkata"/>
+                <f:convertDateTime pattern="yyyy-MMM-dd" timeZone="IST"/>
             </h:outputText>
         </h4>
         <p:growl id="growl" showDetail="true" />
@@ -32,11 +32,14 @@
                         <h:outputText value="#{rowdetails.callGenerationPrice}" />
                     </p:column>
                     <p:column headerText="Raw Fibo-Fractal Call">
-                        <h:outputText value="#{rowdetails.callVersionOne}" />                        
+                        
+                        <h:outputText value="#{rowdetails.callVersionOne eq 'buy' ? 'Buy' : (rowdetails.callVersionOne eq 'sell' ? 'Sell': 
+                                             (rowdetails.callVersionOne eq 'no' ? 'Undefined' : ''))}" />
                     </p:column> 
                     
                     <p:column headerText="Tuned Fibo-Fractal Call">                        
-                        <h:outputText value="#{rowdetails.callVersionTwo}" />
+                        <h:outputText value="#{rowdetails.callVersionTwo eq 'buy' ? 'Buy' : (rowdetails.callVersionTwo eq 'sell' ? 'Sell': 
+                                             (rowdetails.callVersionTwo eq 'no' ? 'Undefined' : ''))}" />
                     </p:column>                     
                 </p:dataTable>               
                 

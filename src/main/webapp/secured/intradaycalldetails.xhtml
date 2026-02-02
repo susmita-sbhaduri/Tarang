@@ -8,7 +8,11 @@
                 xmlns:h="jakarta.faces.html">
 
     <ui:define name="content">
-        <h4>For Datetime #{intradayCallDetails.selectedTimeStr}</h4>
+        <h4>For Datetime 
+            <h:outputText value="#{intradayCallDetails.selectedTime}">
+                <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss"/>
+            </h:outputText>
+        </h4>
         <p:growl id="growl" showDetail="true" />
 
         <f:metadata>
@@ -32,11 +36,12 @@
                         <h:outputText value="#{rowdetails.callGenerationPrice}" />
                     </p:column>
                     <p:column headerText="Raw Fibo-Fractal Call">
-                        <h:outputText value="#{rowdetails.callVersionOne}" />                        
-                    </p:column> 
-                    
+                        <h:outputText value="#{rowdetails.callVersionOne eq 'buy' ? 'Buy' : (rowdetails.callVersionOne eq 'sell' ? 'Sell': 
+                                             (rowdetails.callVersionOne eq 'no' ? 'Undefined' : ''))}" />
+                    </p:column>
                     <p:column headerText="Tuned Fibo-Fractal Call">                        
-                        <h:outputText value="#{rowdetails.callVersionTwo}" />
+                        <h:outputText value="#{rowdetails.callVersionTwo eq 'buy' ? 'Buy' : (rowdetails.callVersionTwo eq 'sell' ? 'Sell': 
+                                             (rowdetails.callVersionTwo eq 'no' ? 'Undefined' : ''))}" />
                     </p:column>                     
                 </p:dataTable>               
                 
