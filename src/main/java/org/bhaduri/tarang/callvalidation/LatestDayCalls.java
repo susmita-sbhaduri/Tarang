@@ -7,10 +7,10 @@ package org.bhaduri.tarang.callvalidation;
 import jakarta.inject.Named;
 import jakarta.faces.view.ViewScoped;
 import java.io.Serializable;
-import java.util.Calendar;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 import javax.naming.NamingException;
 import org.bhaduri.tarang.DTO.CallTable;
 import org.bhaduri.tarang.services.MasterDataServices;
@@ -19,31 +19,33 @@ import org.bhaduri.tarang.services.MasterDataServices;
  *
  * @author sb
  */
-@Named(value = "dayCalls")
+@Named(value = "latestDayCalls")
 @ViewScoped
-public class DayCalls implements Serializable {
+public class LatestDayCalls implements Serializable {
     List<CallTable> dayCallist;
     private Date today;
     /**
-     * Creates a new instance of DayCalls
+     * Creates a new instance of LatestDayCalls
      */
-    public DayCalls() {
+    public LatestDayCalls() {
     }
-    public void fillValues() throws NamingException {
+    public void fillValues() throws NamingException, ParseException {
+        today = new Date();
         MasterDataServices masterDataService = new MasterDataServices();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        // Step 1: Get today's date in yyyy-MM-dd format
+        SimpleDateFormat dateOnlyFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String todayDate = dateOnlyFormat.format(new Date());  // e.g., "2026-02-03"
+
+        // Step 2: Append the fixed time
+        String fullDateTimeStr = todayDate + " 15:27:00.000";  // e.g., "2026-02-03 15:27:00.000"
+
+        // Step 3: Parse to Date
+        Date targetDate;
+        targetDate = sdf.parse(fullDateTimeStr);
         
-        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Kolkata"));        
-        cal.set(Calendar.HOUR_OF_DAY, 0);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MILLISECOND, 0);
-        today = cal.getTime();
-        
-        cal.add(Calendar.DAY_OF_MONTH, -1);
-        Date yday = cal.getTime();
         int scripCount = masterDataService.getCountScripId();
-//        dayCallist = masterDataService.getDayCallList(today, yday);  
-        dayCallist = masterDataService.getDayCallList(today, scripCount);
+        dayCallist = masterDataService.getLatestDayCallList(targetDate, scripCount);
         
     }
 
@@ -62,6 +64,5 @@ public class DayCalls implements Serializable {
     public void setToday(Date today) {
         this.today = today;
     }
-    
     
 }

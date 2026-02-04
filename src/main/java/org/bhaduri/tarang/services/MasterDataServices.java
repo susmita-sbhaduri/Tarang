@@ -90,6 +90,19 @@ public class MasterDataServices {
         }
     }
     
+    public int getCountScripId() {
+        ScripsDA scripsDA = new ScripsDA(utx,emf);
+        try {
+            Long longcount = scripsDA.getScripCount();
+            return longcount.intValue();
+        } catch (NoResultException e) {
+            System.out.println("No records in scrips table");
+            return 0;
+        } catch (Exception exception) {
+            System.out.println(exception + " has occurred in getCountScripId().");
+            return 0;
+        }
+    }
 //    public List<ScripDTO> getCallScripIdList() {
 //        CalltableDAO calltable = new CalltableDAO(utx,emf);
 //        List<ScripDTO> recordList = new ArrayList<>();
@@ -145,12 +158,12 @@ public class MasterDataServices {
         }
     }
     
-    public List<Date> getIntraDateList(Date todaydate) {
+    public List<Date> getIntraDateList(Date todaydate, Date todayEndDate) {
         CalltableDAO calldao = new CalltableDAO(utx,emf);
         
         List<Date> recordList = new ArrayList<>();
         try {   
-            recordList = calldao.listIntradayDates(todaydate);
+            recordList = calldao.listIntradayDates(todaydate, todayEndDate);
             return recordList;
         }
         catch (NoResultException e) {
@@ -195,13 +208,13 @@ public class MasterDataServices {
     }
     
 //    public List<CallTable> getDayCallList(Date today, Date yday) {
-    public List<CallTable> getDayCallList(Date today) {
+    public List<CallTable> getDayCallList(Date today, int scripCount) {
         CalltableDAO calldao = new CalltableDAO(utx,emf);
         CallTable record = new CallTable();
         List<CallTable> recordList = new ArrayList<>();
         try {  
 //            List<Calltable> calllist = calldao.listDayCalls(today, yday);
-            List<Calltable> calllist = calldao.listDayCalls(today);
+            List<Calltable> calllist = calldao.listDayCalls(today, scripCount);
             for (int i = 0; i < calllist.size(); i++) {
                 record.setScripId(calllist.get(i).getCalltablePK().getScripid());
                 record.setCallGenerationTimeStamp(calllist.get(i).getCalltablePK()
@@ -223,6 +236,38 @@ public class MasterDataServices {
         }
         catch (Exception exception) {
             System.out.println(exception + " has occurred in getDayCallList.");
+            return null;
+        }
+    }
+    
+     public List<CallTable> getLatestDayCallList(Date latest, int scripCount) {
+        CalltableDAO calldao = new CalltableDAO(utx,emf);
+        CallTable record = new CallTable();
+        List<CallTable> recordList = new ArrayList<>();
+        try {  
+//            List<Calltable> calllist = calldao.listDayCalls(today, yday);
+            List<Calltable> calllist = calldao.listLatestDayCalls(latest, scripCount);
+            for (int i = 0; i < calllist.size(); i++) {
+                record.setScripId(calllist.get(i).getCalltablePK().getScripid());
+                record.setCallGenerationTimeStamp(calllist.get(i).getCalltablePK()
+                        .getLastupdateminute());
+                record.setCallVersionOne(calllist.get(i).getCallone());
+                record.setCallVersionTwo(calllist.get(i).getCalltwo());
+                record.setCallVersionThree(calllist.get(i).getCallthree());
+                record.setRetraceVersionOne(calllist.get(i).getRetraceone());
+                record.setRetraceVersionTwo(calllist.get(i).getRetracetwo());
+                record.setCallGenerationPrice(calllist.get(i).getPrice());
+                recordList.add(record);
+                record = new CallTable();
+            }
+            return recordList;
+        }
+        catch (NoResultException e) {
+            System.out.println("No record found for  latest today calls.");           
+            return null;
+        }
+        catch (Exception exception) {
+            System.out.println(exception + " has occurred in getLatestDayCallList.");
             return null;
         }
     }

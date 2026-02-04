@@ -31,9 +31,16 @@ public class IntradayCalls implements Serializable {
     }
     public void fillScripValues() throws NamingException, ParseException {
         MasterDataServices masterDataService = new MasterDataServices();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date todayDate = sdf.parse(sdf.format(new Date()));
-        intraDateList = masterDataService.getIntraDateList(todayDate);
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        SimpleDateFormat dateOnlyFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date todayDate = dateOnlyFormat.parse(sdf.format(new Date()));       
+                
+        String todayDateString = dateOnlyFormat.format(new Date());  // e.g., "2026-02-03"
+        String fullDateTimeStr = todayDateString + " 15:27:00.000";  // e.g., "2026-02-03 15:27:00.000"
+        Date targetDate;
+        targetDate = sdf.parse(fullDateTimeStr);
+        intraDateList = masterDataService.getIntraDateList(todayDate, targetDate);
     }
     
     public String goToCallDetails() { 

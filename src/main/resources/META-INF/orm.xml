@@ -10,11 +10,14 @@
     <named-query name="Scrips.listScripid">
         <query>SELECT s FROM Scrips s</query>
     </named-query>
+    <named-query name="Scrips.getScripCount">
+        <query>SELECT COUNT(s) FROM Scrips s</query>
+    </named-query>
     <named-query name="Validatecall.listCallsForScripid">
         <query>SELECT v FROM Validatecall v WHERE v.validatecallPK.scripid = :scripid</query>
     </named-query>
     <named-query name="Calltable.listIntradayDates">
-        <query>SELECT DISTINCT c.calltablePK.lastupdateminute FROM Calltable c WHERE c.calltablePK.lastupdateminute &gt; :cutoffdate</query>
+        <query>SELECT DISTINCT c.calltablePK.lastupdateminute FROM Calltable c WHERE c.calltablePK.lastupdateminute &gt; :cutoffdate AND c.calltablePK.lastupdateminute &lt; :dateend</query>
     </named-query>
     <named-query name="Calltable.listIntradayCalls">
         <query>SELECT c FROM Calltable c WHERE c.calltablePK.lastupdateminute = :lastupdateminute</query>
@@ -25,6 +28,9 @@
     
     <named-query name="Calltable.listDayCalls">
         <query>SELECT c FROM Calltable c WHERE c.calltablePK.lastupdateminute &lt; :dateone ORDER BY c.calltablePK.lastupdateminute DESC</query>
+    </named-query>
+    <named-query name="Calltable.listLatestDayCalls">
+        <query>SELECT c FROM Calltable c WHERE c.calltablePK.lastupdateminute &gt; :dateone ORDER BY c.calltablePK.lastupdateminute DESC</query>
     </named-query>
 </entity-mappings>
 

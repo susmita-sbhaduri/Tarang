@@ -8,18 +8,19 @@
                 xmlns:h="jakarta.faces.html">
 
     <ui:define name="content">
-        <h4>For Day 
-            <h:outputText value="#{dayCalls.today}">
+        <h4>Latest Day-end Call for 
+            <h:outputText value="#{latestDayCalls.today}">
                 <f:convertDateTime pattern="yyyy-MMM-dd" timeZone="IST"/>
             </h:outputText>
         </h4>
-        <p>This is yesterday's last call list generated after 3:30 PM yesterday. 
-            These calls should be validated against today's market data.
+        <p>This is the call list is generated ONLY after 3:45 PM today. This call list will appear 
+            in Yesterday's Calls tomorrow. 
+            These calls are to be validated for tomorrow's market data.
         </p>
         <p:growl id="growl" showDetail="true" />
 
         <f:metadata>                        
-            <f:viewAction action="#{dayCalls.fillValues()}" />
+            <f:viewAction action="#{latestDayCalls.fillValues()}" />
         </f:metadata>
 
         <div class="card">            
@@ -27,7 +28,7 @@
                 
                 
                 <p:dataTable id="daycalllist" var="rowdetails" 
-                             value="#{dayCalls.dayCallist}">
+                             value="#{latestDayCalls.dayCallist}">
                     <p:column headerText="Scrip Id">
                         <h:outputText value="#{rowdetails.scripId}"/>
                     </p:column>
@@ -50,3 +51,4 @@
         </div>
     </ui:define>    
 </ui:composition>
+

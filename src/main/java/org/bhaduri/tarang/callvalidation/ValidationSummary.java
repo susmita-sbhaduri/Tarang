@@ -18,6 +18,11 @@ import software.xdev.chartjs.model.data.DoughnutData;
 import software.xdev.chartjs.model.dataset.DoughnutDataset;
 import software.xdev.chartjs.model.options.DoughnutOptions;
 import java.math.BigDecimal;
+import static org.bhaduri.tarang.callvalidation.RangeConstants.FIRST_RANGE_HIGH;
+import static org.bhaduri.tarang.callvalidation.RangeConstants.FIRST_RANGE_LOW;
+import static org.bhaduri.tarang.callvalidation.RangeConstants.SECOND_RANGE_HIGH;
+import static org.bhaduri.tarang.callvalidation.RangeConstants.SECOND_RANGE_LOW;
+import static org.bhaduri.tarang.callvalidation.RangeConstants.THIRD_RANGE_LOW;
 import software.xdev.chartjs.model.color.Color;
 import software.xdev.chartjs.model.options.Plugins;
 import software.xdev.chartjs.model.options.Title;
@@ -77,16 +82,16 @@ public class ValidationSummary implements Serializable {
                     failcounttwo = failcounttwo + 1;
                 } else {
                     diff = Math.abs(callsperscrip.get(i).getActualPriceOne() - price);
-                    if ((diff / price) <= ((0.2 / 100) * price)) {
+                    if ((diff / price) <= ((FIRST_RANGE_HIGH / 100) * price)) {
                         rangeonecountone = rangeonecountone + 1;
                         rangeonecounttwo = rangeonecounttwo + 1;
                     }
-                    if ((((0.2 / 100) * price) < (diff / price))
-                            && ((diff / price) <= ((0.4 / 100) * price))) {
+                    if ((((SECOND_RANGE_LOW / 100) * price) < (diff / price))
+                            && ((diff / price) <= ((SECOND_RANGE_HIGH / 100) * price))) {
                         rangetwocountone = rangetwocountone + 1;
                         rangetwocounttwo = rangetwocounttwo + 1;
                     }
-                    if ((diff / price) > ((0.4 / 100) * price)) {
+                    if ((diff / price) > ((THIRD_RANGE_LOW / 100) * price)) {
                         rangethreecountone = rangethreecountone + 1;
                         rangethreecounttwo = rangethreecounttwo + 1;
                     }
@@ -109,27 +114,27 @@ public class ValidationSummary implements Serializable {
                         || (callsperscrip.get(i).getOutcomeTwo().equals("pass"))) {
                     if (callsperscrip.get(i).getOutcomeOne().equals("pass")) {
                         diff = Math.abs(callsperscrip.get(i).getActualPriceOne() - price);
-                        if ((diff / price) <= ((0.2 / 100) * price)) {
+                        if ((diff / price) <= ((FIRST_RANGE_HIGH / 100) * price)) {
                             rangeonecountone = rangeonecountone + 1;
                         }
-                        if ((((0.2 / 100) * price) < (diff / price))
-                                && ((diff / price) <= ((0.4 / 100) * price))) {
+                        if ((((SECOND_RANGE_LOW / 100) * price) < (diff / price))
+                                && ((diff / price) <= ((SECOND_RANGE_HIGH / 100) * price))) {
                             rangetwocountone = rangetwocountone + 1;
                         }
-                        if ((diff / price) > ((0.4 / 100) * price)) {
+                        if ((diff / price) > ((THIRD_RANGE_LOW / 100) * price)) {
                             rangethreecountone = rangethreecountone + 1;
                         }
                     }
                     if (callsperscrip.get(i).getOutcomeTwo().equals("pass")) {
                         diff = Math.abs(callsperscrip.get(i).getActualPriceTwo() - price);
-                        if ((diff / price) <= ((0.2 / 100) * price)) {
+                        if ((diff / price) <= ((FIRST_RANGE_HIGH / 100) * price)) {
                             rangeonecounttwo = rangeonecounttwo + 1;
                         }
-                        if ((((0.2 / 100) * price) < (diff / price))
-                                && ((diff / price) <= ((0.4 / 100) * price))) {
+                        if ((((SECOND_RANGE_LOW / 100) * price) < (diff / price))
+                                && ((diff / price) <= ((SECOND_RANGE_HIGH / 100) * price))) {
                             rangetwocounttwo = rangetwocounttwo + 1;
                         }
-                        if ((diff / price) > ((0.4 / 100) * price)) {
+                        if ((diff / price) > ((THIRD_RANGE_LOW / 100) * price)) {
                             rangethreecounttwo = rangethreecounttwo + 1;
                         }
                     }
@@ -143,14 +148,14 @@ public class ValidationSummary implements Serializable {
                     failcountone = failcountone + 1;
                 } else {
                     diff = Math.abs(callsperscrip.get(i).getActualPriceOne() - price);
-                    if ((diff / price) <= ((0.2 / 100) * price)) {
+                    if ((diff / price) <= ((FIRST_RANGE_HIGH / 100) * price)) {
                         rangeonecountone = rangeonecountone + 1;
                     }
-                    if ((((0.2 / 100) * price) < (diff / price))
-                            && ((diff / price) <= ((0.4 / 100) * price))) {
+                    if ((((SECOND_RANGE_LOW / 100) * price) < (diff / price))
+                            && ((diff / price) <= ((SECOND_RANGE_HIGH / 100) * price))) {
                         rangetwocountone = rangetwocountone + 1;
                     }
-                    if ((diff / price) > ((0.4 / 100) * price)) {
+                    if ((diff / price) > ((THIRD_RANGE_LOW / 100) * price)) {
                         rangethreecountone = rangethreecountone + 1;
                     }
                 }
@@ -163,14 +168,14 @@ public class ValidationSummary implements Serializable {
                     failcounttwo = failcounttwo + 1;
                 } else {
                     diff = Math.abs(callsperscrip.get(i).getActualPriceTwo() - price);
-                    if ((diff / price) <= ((0.2 / 100) * price)) {
+                    if ((diff / price) <= ((FIRST_RANGE_HIGH / 100) * price)) {
                         rangeonecounttwo = rangeonecounttwo + 1;
                     }
-                    if ((((0.2 / 100) * price) < (diff / price))
-                            && ((diff / price) <= ((0.4 / 100) * price))) {
+                    if ((((SECOND_RANGE_LOW / 100) * price) < (diff / price))
+                            && ((diff / price) <= ((SECOND_RANGE_HIGH / 100) * price))) {
                         rangetwocounttwo = rangetwocounttwo + 1;
                     }
-                    if ((diff / price) > ((0.4 / 100) * price)) {
+                    if ((diff / price) > ((THIRD_RANGE_LOW / 100) * price)) {
                         rangethreecounttwo = rangethreecounttwo + 1;
                     }
                 }
@@ -184,7 +189,9 @@ public class ValidationSummary implements Serializable {
         double ratio = (double) rangeonecountone / callsperscrip.size();
         String formattedRatio = String.format("%.2f", ratio * 100);
         ValidationSummaryDTO reportRecord = new ValidationSummaryDTO();
-        reportRecord.setHeading("0-0.2(%)");
+        
+        reportRecord.setHeading(String.valueOf(FIRST_RANGE_LOW)+"-"+ 
+                String.valueOf(FIRST_RANGE_HIGH)+"(%)");
         reportRecord.setCallOneCount(String.valueOf(rangeonecountone));
         reportRecord.setCallOnePercent(formattedRatio + "%");
         ratio = (double) rangeonecounttwo / callsperscrip.size();
@@ -196,7 +203,8 @@ public class ValidationSummary implements Serializable {
         ratio = (double) rangetwocountone / callsperscrip.size();
         formattedRatio = String.format("%.2f", ratio * 100);
         reportRecord = new ValidationSummaryDTO();
-        reportRecord.setHeading("0.2-0.4(%)");
+        reportRecord.setHeading(String.valueOf(SECOND_RANGE_LOW)+"-"+
+                String.valueOf(SECOND_RANGE_HIGH)+"(%)");
         reportRecord.setCallOneCount(String.valueOf(rangetwocountone));
         reportRecord.setCallOnePercent(formattedRatio + "%");
         ratio = (double) rangetwocounttwo / callsperscrip.size();
@@ -208,7 +216,7 @@ public class ValidationSummary implements Serializable {
         ratio = (double) rangethreecountone / callsperscrip.size();
         formattedRatio = String.format("%.2f", ratio * 100);
         reportRecord = new ValidationSummaryDTO();
-        reportRecord.setHeading("> 0.4(%)");
+        reportRecord.setHeading(">"+String.valueOf(THIRD_RANGE_LOW)+"(%)");
         reportRecord.setCallOneCount(String.valueOf(rangethreecountone));
         reportRecord.setCallOnePercent(formattedRatio + "%");
         ratio = (double) rangethreecounttwo / callsperscrip.size();
@@ -296,7 +304,11 @@ public class ValidationSummary implements Serializable {
                                         new Color(255, 205, 86))
                         )
                         
-                        .setLabels("0-0.2(%)", "0.2-0.4(%)", "> 0.4(%)")
+                        .setLabels(String.valueOf(FIRST_RANGE_LOW)+"-"+ 
+                String.valueOf(FIRST_RANGE_HIGH)+"(%)", 
+                                String.valueOf(SECOND_RANGE_LOW)+"-"+
+                String.valueOf(SECOND_RANGE_HIGH)+"(%)", 
+                                ">"+String.valueOf(THIRD_RANGE_LOW)+"(%)")
                 )
                 .setOptions(new DoughnutOptions()
                         .setMaintainAspectRatio(Boolean.FALSE)
@@ -350,7 +362,11 @@ public class ValidationSummary implements Serializable {
                                         new Color(255, 205, 86))
                         )
                         
-                        .setLabels("0-0.2(%)", "0.2-0.4(%)", "> 0.4(%)")
+                        .setLabels(String.valueOf(FIRST_RANGE_LOW)+"-"+ 
+                String.valueOf(FIRST_RANGE_HIGH)+"(%)", 
+                                String.valueOf(SECOND_RANGE_LOW)+"-"+
+                String.valueOf(SECOND_RANGE_HIGH)+"(%)", 
+                                ">"+String.valueOf(THIRD_RANGE_LOW)+"(%)")
                 )
                 .setOptions(new DoughnutOptions()
                         .setMaintainAspectRatio(Boolean.FALSE)

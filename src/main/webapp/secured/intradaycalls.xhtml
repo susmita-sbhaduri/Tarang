@@ -9,6 +9,9 @@
 
    <ui:define name="content">
         <h4>#{intradayCalls.dateHeading}</h4>
+        <p>These are intra-day calls generated from 10 PM to 3:30 PM today at an interval 
+            of 1 hour. No validation script is given for these calls.            
+        </p>
         <p:growl id="growl" showDetail="true" />
         
         <f:metadata>
@@ -20,7 +23,7 @@
                              reflow="true">
                     <p:column headerText="Time List">
                         <h:outputText value="#{date}">
-                            <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss"/>
+                            <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss" timeZone="IST"/>
                         </h:outputText>
                     </p:column>
                                 

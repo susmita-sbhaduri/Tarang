@@ -31,4 +31,11 @@ public class ScripsDA extends ScripsJpaController{
 //        List<Scrips> listofcropcat = query.getResultList();
 //        return listofcropcat;
 //    }
+    
+    public Long getScripCount() {
+        EntityManager em = getEntityManager();
+        TypedQuery<Long> query = em.createNamedQuery("Scrips.getScripCount", Long.class);   
+         
+        return query.getSingleResult();
+    }
 }
