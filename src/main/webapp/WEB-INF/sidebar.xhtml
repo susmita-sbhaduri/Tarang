@@ -29,11 +29,13 @@
                 <po:menu widgetVar="OmegaMenuWidget">
                     
                     <p:menuitem id="m_scriplist" value="Historical Success Rate" icon="pi pi-fw pi-star" outcome="/secured/ScripList"/>
-                    <p:menuitem id="m_intraday" value="Intraday Call List" icon="pi pi-fw pi-star" outcome="/secured/intradaycalls"/>
+                    <p:menuitem id="m_intraday" value="Intraday Predictions" icon="pi pi-fw pi-star" outcome="/secured/intradaycalls"/>
                     
-                    <p:submenu id="m_daycalls" label="Day Call List" icon="pi pi-fw pi-star" >
-                        <p:menuitem id="m_yday" value="Yesterday's Calls" icon="pi pi-fw pi-id-card"  outcome="/secured/daycalls"/>
-                        <p:menuitem id="m_today" value="Latest Calls" icon="pi pi-fw pi-id-card"  outcome="/secured/latestdatcalls"/>
+                    <p:submenu id="m_daycalls" label="Daily Predictions" icon="pi pi-fw pi-star" >
+                        <p:menuitem id="m_yday" value="Previous Trading Session" icon="pi pi-fw pi-id-card"  outcome="/secured/daycalls"/>
+                        <p:menuitem id="m_today" value="Current Trading Session" icon="pi pi-fw pi-id-card"  
+                                    outcome="/secured/latestdatcalls"
+                                    />
                     </p:submenu>
                     
                 </po:menu>

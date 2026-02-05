@@ -8,8 +8,12 @@
                 xmlns:h="jakarta.faces.html">
 
    <ui:define name="content">
-        <h4>Scrip List</h4>
-        <p>We here provide validation for last 60 day's Day-end calls we have given.
+        <h4>Validations</h4>
+        <p>We here provide validation for last 60 day's post market predictions available under the 
+            menu item <h:link value="Current Trading Session" outcome="/secured/latestdatcalls"> </h:link>each trading day. 
+            <br></br>
+            The same predictions are moved to the menu item <h:link value="Previous Trading Session" outcome="/secured/daycalls"> </h:link> in each
+            following trading session.
         </p>
         <p:growl id="growl" showDetail="true" />
         
@@ -26,7 +30,7 @@
                                 
                     <p:column>
                         <p:commandButton styleClass="blue-button" 
-                                         value="Submit"
+                                         value="Validation Results"
                                          action="#{scripList.goToScripDetails()}" >
                             <f:setPropertyActionListener value="#{scrip}" target="#{scripList.selectedScrip}" />
                         </p:commandButton>

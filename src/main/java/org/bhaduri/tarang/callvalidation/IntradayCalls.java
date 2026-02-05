@@ -76,5 +76,4 @@ public class IntradayCalls implements Serializable {
         this.selectedTime = selectedTime;
     }
     
-    
 }

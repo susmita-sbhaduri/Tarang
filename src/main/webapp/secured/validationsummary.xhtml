@@ -8,7 +8,7 @@
                 xmlns:h="jakarta.faces.html">
 
     <ui:define name="content">
-        <h4>#{validationSummary.scripName}</h4>
+        <h4>Validation Summary for #{validationSummary.scripName}</h4>
         <p:growl id="growl" showDetail="true" />
 
         <f:metadata>
@@ -20,7 +20,7 @@
         <div class="card">            
             <h:form id="validationgrid" style="text-align: center">  
                 <div style="text-align: left;">
-                    <p:button outcome="/secured/ScripList" value="back" id="h_buttonid" />                    
+                    <p:button outcome="/secured/ScripList" value="Back" id="h_buttonid" />                    
                     &nbsp;&nbsp;&nbsp;                    
                 </div>
                 <!-- 4 Pie Charts: 2 rows x 2 columns -->

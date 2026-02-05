@@ -24,12 +24,16 @@ import org.bhaduri.tarang.services.MasterDataServices;
 public class LatestDayCalls implements Serializable {
     List<CallTable> dayCallist;
     private Date today;
+    
+    
     /**
      * Creates a new instance of LatestDayCalls
      */
     public LatestDayCalls() {
+        
     }
     public void fillValues() throws NamingException, ParseException {
+
         today = new Date();
         MasterDataServices masterDataService = new MasterDataServices();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
@@ -43,12 +47,12 @@ public class LatestDayCalls implements Serializable {
         // Step 3: Parse to Date
         Date targetDate;
         targetDate = sdf.parse(fullDateTimeStr);
-        
+
         int scripCount = masterDataService.getCountScripId();
         dayCallist = masterDataService.getLatestDayCallList(targetDate, scripCount);
-        
     }
-
+    
+    
     public List<CallTable> getDayCallist() {
         return dayCallist;
     }
@@ -64,5 +68,4 @@ public class LatestDayCalls implements Serializable {
     public void setToday(Date today) {
         this.today = today;
     }
-    
 }

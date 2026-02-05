@@ -8,14 +8,15 @@
                 xmlns:h="jakarta.faces.html">
 
     <ui:define name="content">
-        <h4>Latest Day-end Call for 
+        <h4>Post Market Prediction for
             <h:outputText value="#{latestDayCalls.today}">
                 <f:convertDateTime pattern="yyyy-MMM-dd" timeZone="IST"/>
             </h:outputText>
         </h4>
-        <p>This is the call list is generated ONLY after 3:45 PM today. This call list will appear 
-            in Yesterday's Calls tomorrow. 
-            These calls are to be validated for tomorrow's market data.
+        <p>These calls is generated after 3:45 PM for the current trading session. 
+            These calls will appear under the menu item <h:link value="Previous Trading Session" outcome="/secured/daycalls"> </h:link>  in the next trading 
+            session. 
+            These calls are predictions for the next trading session.
         </p>
         <p:growl id="growl" showDetail="true" />
 
