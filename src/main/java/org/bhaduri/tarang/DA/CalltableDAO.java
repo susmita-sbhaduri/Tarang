@@ -55,11 +55,11 @@ public class CalltableDAO extends CalltableJpaController{
         return query.getResultList();
     }
     
-    public List<Calltable> listLatestDayCalls(Date dateinputone, int count) {
+    public List<Calltable> listLatestDayCalls(Date dateinputone) {
         EntityManager em = getEntityManager();
         TypedQuery<Calltable> query = em.createNamedQuery("Calltable.listLatestDayCalls", Calltable.class);
         query.setParameter("dateone", dateinputone);
-        query.setMaxResults(count);           
+//        query.setMaxResults(count);           
         return query.getResultList();
     }
 

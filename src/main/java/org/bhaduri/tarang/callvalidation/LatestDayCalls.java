@@ -48,8 +48,8 @@ public class LatestDayCalls implements Serializable {
         Date targetDate;
         targetDate = sdf.parse(fullDateTimeStr);
 
-        int scripCount = masterDataService.getCountScripId();
-        dayCallist = masterDataService.getLatestDayCallList(targetDate, scripCount);
+//        int scripCount = masterDataService.getCountScripId();
+        dayCallist = masterDataService.getLatestDayCallList(targetDate);
     }
     
     

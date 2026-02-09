@@ -29,8 +29,11 @@
     <named-query name="Calltable.listDayCalls">
         <query>SELECT c FROM Calltable c WHERE c.calltablePK.lastupdateminute &lt; :dateone ORDER BY c.calltablePK.lastupdateminute DESC</query>
     </named-query>
-    <named-query name="Calltable.listLatestDayCalls">
+<!--    <named-query name="Calltable.listLatestDayCalls">
         <query>SELECT c FROM Calltable c WHERE c.calltablePK.lastupdateminute &gt; :dateone ORDER BY c.calltablePK.lastupdateminute DESC</query>
+    </named-query>-->
+    <named-query name="Calltable.listLatestDayCalls">
+        <query>SELECT c FROM Calltable c WHERE c.calltablePK.lastupdateminute &gt; :dateone</query>
     </named-query>
 </entity-mappings>
 

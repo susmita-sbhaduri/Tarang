@@ -240,13 +240,13 @@ public class MasterDataServices {
         }
     }
     
-     public List<CallTable> getLatestDayCallList(Date latest, int scripCount) {
+     public List<CallTable> getLatestDayCallList(Date latest) {
         CalltableDAO calldao = new CalltableDAO(utx,emf);
         CallTable record = new CallTable();
         List<CallTable> recordList = new ArrayList<>();
         try {  
 //            List<Calltable> calllist = calldao.listDayCalls(today, yday);
-            List<Calltable> calllist = calldao.listLatestDayCalls(latest, scripCount);
+            List<Calltable> calllist = calldao.listLatestDayCalls(latest);
             for (int i = 0; i < calllist.size(); i++) {
                 record.setScripId(calllist.get(i).getCalltablePK().getScripid());
                 record.setCallGenerationTimeStamp(calllist.get(i).getCalltablePK()

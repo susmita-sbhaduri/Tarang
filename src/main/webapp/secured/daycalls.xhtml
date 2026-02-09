@@ -8,12 +8,12 @@
                 xmlns:h="jakarta.faces.html">
 
     <ui:define name="content">
-        <h4>Post Market Prediction as Given on 
-            <h:outputText value="#{dayCalls.today}">
+        <h4>Post Market Prediction as Given on Previous Trading Session
+<!--            <h:outputText value="#{dayCalls.today}">
                 <f:convertDateTime pattern="yyyy-MMM-dd" timeZone="IST"/>
-            </h:outputText>
+            </h:outputText>-->
         </h4>
-        <p>These are predictions made yesterday after 3:30 PM of the last trading session. 
+        <p>These are predictions made during last trading session after 3:30 PM of that session. 
             These can be validated against today's market data.
         </p>
         <p:growl id="growl" showDetail="true" />
